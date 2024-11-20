@@ -42,14 +42,39 @@ export class FormComponent {
   }
 
   ngOnInit() {
-    this.userForm.valueChanges.subscribe((formValues) => {
-      console.log('Form Changed:', formValues);
-      // this.userForm.patchValue({
-      //   productName: 'TEST',
-      // });
+    Object.keys(this.userForm.controls).forEach((controlName) => {
+      this.userForm.get(controlName)?.valueChanges.subscribe((newValue) => {
+        if (controlName === 'currency') {
+          this.userForm.patchValue({
+            price: this.product.price.amount / 100,
+          });
+        }
 
-      if (formValues.currency) {
-      }
+        if (controlName === 'type') {
+          if (newValue === 'other') {
+            this.userForm.patchValue({
+              seller: null,
+            });
+          } else {
+            this.userForm.patchValue({
+              seller: this.product.sellerId,
+            });
+          }
+        }
+
+        if (controlName === 'isPreorder') {
+          const cuurentValue = newValue ? 0 : this.product.popularityValue;
+
+          this.userForm.patchValue({
+            popularityValue: cuurentValue,
+          });
+        }
+
+        console.log(
+          `Pole "${controlName}" zostało zmienione. Nowa wartość:`,
+          newValue
+        );
+      });
     });
   }
 
@@ -75,6 +100,7 @@ export class FormComponent {
       type: this.product.type,
       price: this.product.price.amount / 100,
       currency: this.product.price.currency,
+      seller: this.product.sellerId,
       activeStockNumber: this.product.activeStockNumber,
     });
   }

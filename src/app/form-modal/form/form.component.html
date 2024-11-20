@@ -16,6 +16,7 @@
       class="form-control"
       id="popularityValue"
       formControlName="popularityValue"
+      [attr.readonly]="userForm.get('isPreorder')?.value ? true : null"
     />
   </div>
   <div class="mb-3 form-check">
