@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ListOfferComponent } from './list-offer/list-offer.component';
+import { ListOfferComponent } from './components/list-offer/list-offer.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
