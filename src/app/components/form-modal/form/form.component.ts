@@ -18,12 +18,12 @@ export class FormComponent {
   @Input({
     required: true,
   })
-  product!: Product;
+  product: any;
 
   @Input({
     required: true,
   })
-  listProducts!: Product[];
+  listProducts: any;
 
   userForm: FormGroup;
 
@@ -70,11 +70,6 @@ export class FormComponent {
             popularityValue: cuurentValue,
           });
         }
-
-        console.log(
-          `Pole "${controlName}" zostało zmienione. Nowa wartość:`,
-          newValue
-        );
       });
     });
   }

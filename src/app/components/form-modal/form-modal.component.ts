@@ -14,10 +14,10 @@ export class FormModalComponent {
   @Input({
     required: true,
   })
-  product!: Product;
+  product: any;
 
   @Input({
     required: true,
   })
-  listProducts!: Product[];
+  listProducts: any;
 }
