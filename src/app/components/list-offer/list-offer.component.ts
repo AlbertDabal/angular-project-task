@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormModalComponent } from '../form-modal/form-modal.component';
@@ -7,7 +7,7 @@ import { NgxPermissionsModule, NgxPermissionsService } from 'ngx-permissions';
 @Component({
   selector: 'app-list-offer',
   standalone: true,
-  imports: [HttpClientModule, FormModalComponent, NgxPermissionsModule],
+  imports: [FormModalComponent, NgxPermissionsModule],
   templateUrl: './list-offer.component.html',
   styleUrl: './list-offer.component.css',
 })
