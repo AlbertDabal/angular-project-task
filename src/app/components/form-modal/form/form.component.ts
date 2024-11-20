@@ -77,12 +77,15 @@ export class FormComponent {
   ngOnChanges() {
     if (!this.listProducts) return;
 
-    const seller = this.listProducts.reduce((acc: any, currentValue: any) => {
-      const { id, name } = currentValue.seller;
+    const seller = this.listProducts.reduce(
+      (acc: Seller[], currentValue: Product) => {
+        const { id, name } = currentValue.seller;
 
-      acc.push({ id: id, name: name });
-      return acc;
-    }, []);
+        acc.push({ id: id, name: name });
+        return acc;
+      },
+      []
+    );
 
     this.listSeller.set(seller);
 

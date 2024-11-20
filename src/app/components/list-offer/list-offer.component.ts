@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormModalComponent } from '../form-modal/form-modal.component';
 import { NgxPermissionsModule, NgxPermissionsService } from 'ngx-permissions';
 import { Product } from '../../../types/product';
+import { ListOffers } from '../../../types/listOffers';
 
 @Component({
   selector: 'app-list-offer',
@@ -25,7 +26,7 @@ export class ListOfferComponent {
   id = signal('');
   isError = signal(false);
   kinguinOfferData = signal<Product[]>([]);
-  selectedItem = signal(null);
+  selectedItem = signal<Product | null>(null);
 
   hasPermission(permission: string): boolean {
     return this.permissionsService.getPermission(permission) !== undefined;
@@ -43,11 +44,11 @@ export class ListOfferComponent {
 
   fetchData() {
     this.http
-      .get(
+      .get<ListOffers>(
         `https://gateway.kinguin.net/offer/api/v2/offers/findActiveOffers/${this.id()}`
       )
       .subscribe(
-        (res: any) => {
+        (res: ListOffers) => {
           this.kinguinOfferData.set(res._embedded.kinguinOffer);
         },
         (error) => {
@@ -78,7 +79,7 @@ export class ListOfferComponent {
     }
   }
 
-  handleSelect(item: any) {
+  handleSelect(item: Product) {
     this.selectedItem.set(item);
   }
 }
