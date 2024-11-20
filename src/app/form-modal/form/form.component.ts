@@ -41,6 +41,18 @@ export class FormComponent {
     });
   }
 
+  ngOnInit() {
+    this.userForm.valueChanges.subscribe((formValues) => {
+      console.log('Form Changed:', formValues);
+      // this.userForm.patchValue({
+      //   productName: 'TEST',
+      // });
+
+      if (formValues.currency) {
+      }
+    });
+  }
+
   ngOnChanges() {
     console.log('product', this.product);
 
