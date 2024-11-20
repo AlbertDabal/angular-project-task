@@ -54,5 +54,24 @@
       <option>PLN</option>
     </select>
   </div>
+  <div class="mb-3">
+    <label for="seller" class="form-label">Seller</label>
+    <select id="seller" class="form-select" formControlName="seller">
+      @for (item of listSeller(); track item) {
+      <option [value]="item.id">{{ item.name }}</option>
+      }
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="activeStockNumber" class="form-label"
+      >Active Stock Number</label
+    >
+    <input
+      type="number"
+      class="form-control"
+      id="activeStockNumber"
+      formControlName="activeStockNumber"
+    />
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

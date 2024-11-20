@@ -14,4 +14,9 @@ export class FormModalComponent {
     required: true,
   })
   product: any;
+
+  @Input({
+    required: true,
+  })
+  listProducts: any;
 }

@@ -1,11 +1,10 @@
-import { Component, Input, input, signal } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, Input, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+interface Seller {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-form',
@@ -20,29 +19,51 @@ export class FormComponent {
   })
   product: any;
 
+  @Input({
+    required: true,
+  })
+  listProducts: any;
+
   userForm: FormGroup;
+
+  listSeller = signal<Seller[]>([]);
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
       productName: [''],
-      popularityValue: ['', [Validators.required, Validators.email]],
+      popularityValue: [''],
       isPreorder: [''],
-      type: ['', Validators.pattern('^[0-9]{9,15}$')],
-      price: ['', [Validators.min(0), Validators.max(150)]],
+      type: [''],
+      price: [''],
       currency: [''],
+      seller: [''],
+      activeStockNumber: [''],
     });
   }
 
   ngOnChanges() {
     console.log('product', this.product);
 
+    const seller = this.listProducts.reduce((acc: any, currentValue: any) => {
+      console.log('currentValue', currentValue);
+      const { id, name } = currentValue.seller;
+
+      acc.push({ id: id, name: name });
+      return acc;
+    }, []);
+
+    console.log('seller', seller);
+
+    this.listSeller.set(seller);
+
     this.userForm.patchValue({
       productName: this.product.productName,
       popularityValue: this.product.popularityValue,
       isPreorder: this.product.isPreorder,
       type: this.product.type,
-      price: this.product.price,
-      currency: this.product.currency,
+      price: this.product.price.amount / 100,
+      currency: this.product.price.currency,
+      activeStockNumber: this.product.activeStockNumber,
     });
   }
 

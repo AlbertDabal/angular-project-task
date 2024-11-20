@@ -58,8 +58,6 @@ export class ListOfferComponent {
   }
 
   handleSelect(item: any) {
-    console.log('item', item);
-
     this.selectedItem.set(item);
   }
 }
