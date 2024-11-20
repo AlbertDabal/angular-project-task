@@ -14,7 +14,7 @@ export class FormModalComponent {
   @Input({
     required: true,
   })
-  product!: Product;
+  product!: Product | null;
 
   @Input({
     required: true,
