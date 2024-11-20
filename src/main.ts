@@ -1,15 +1,9 @@
 /// <reference types="@angular/localize" />
 
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { NgxPermissionsModule } from 'ngx-permissions';
 import { AppComponent } from './app/app.component';
-import { requestInterceptor } from './app/interceptors/request.interceptor';
+import { appConfig } from './app/app.config';
 
-bootstrapApplication(AppComponent, {
-  providers: [
-    provideHttpClient(withInterceptors([requestInterceptor])),
-    importProvidersFrom(NgxPermissionsModule.forRoot()),
-  ],
-}).catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig).catch((err) =>
+  console.error(err)
+);
