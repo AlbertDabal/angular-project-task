@@ -18,12 +18,12 @@ export class FormComponent {
   @Input({
     required: true,
   })
-  product: any;
+  product!: Product;
 
   @Input({
     required: true,
   })
-  listProducts: any;
+  listProducts!: Product[];
 
   userForm: FormGroup;
 
