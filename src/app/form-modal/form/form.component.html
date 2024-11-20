@@ -1,0 +1,58 @@
+<form [formGroup]="userForm">
+  <div class="mb-3">
+    <label for="productName" class="form-label">Product name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="productName"
+      aria-describedby="productName"
+      formControlName="productName"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="popularityValue" class="form-label">Popularity Value </label>
+    <input
+      type="number"
+      class="form-control"
+      id="popularityValue"
+      formControlName="popularityValue"
+    />
+  </div>
+  <div class="mb-3 form-check">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      id="isPreorder"
+      formControlName="isPreorder"
+    />
+    <label class="form-check-label" for="isPreorder">isPreorder</label>
+  </div>
+  <div class="mb-3">
+    <label for="type" class="form-label">Type</label>
+    <select id="type" class="form-select" formControlName="type">
+      <option>kinguin</option>
+      <option>other</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <!-- TODO PODZIELIC KWOTE PRZEZ 100 -->
+    <input
+      type="text"
+      class="form-control"
+      id="price"
+      aria-describedby="price"
+      formControlName="price"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="currency" class="form-label">Currency</label>
+    <select id="currency" class="form-select" formControlName="currency">
+      <option>EUR</option>
+      <option>USD</option>
+      <option>GBP</option>
+      <option>PLN</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
