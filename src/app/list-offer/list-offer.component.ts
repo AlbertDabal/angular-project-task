@@ -2,22 +2,43 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormModalComponent } from '../form-modal/form-modal.component';
+import { NgxPermissionsModule, NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-list-offer',
   standalone: true,
-  imports: [HttpClientModule, FormModalComponent],
+  imports: [HttpClientModule, FormModalComponent, NgxPermissionsModule],
   templateUrl: './list-offer.component.html',
   styleUrl: './list-offer.component.css',
 })
 export class ListOfferComponent {
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private permissionsService: NgxPermissionsService
+  ) {
+    this.permissionsService.addPermission('CAN_VIEW_MODAL');
+  }
 
   CORRECT_VALUE_LENGTH = 24;
   id = signal('');
   isError = signal(false);
   kinguinOfferData = signal<any>([]);
   selectedItem = signal(null);
+
+  hasPermission(permission: string): boolean {
+    return this.permissionsService.getPermission(permission) !== undefined;
+  }
+
+  togglePermission(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+
+    if (isChecked) {
+      this.permissionsService.removePermission('CAN_VIEW_MODAL');
+    } else {
+      this.permissionsService.addPermission('CAN_VIEW_MODAL');
+    }
+  }
 
   fetchData() {
     this.http
@@ -48,12 +69,15 @@ export class ListOfferComponent {
     }
 
     if (this.id().length === this.CORRECT_VALUE_LENGTH) {
+      console.log('TEST12345');
       this.isError.set(false);
       this.addQueryParam();
       this.fetchData();
     } else {
+      console.log('TEST123');
+
       this.isError.set(true);
-      this.kinguinOfferData.set(null);
+      this.kinguinOfferData.set([]);
     }
   }
 

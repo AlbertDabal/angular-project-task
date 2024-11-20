@@ -1,3 +1,7 @@
 table tbody tr:first-child td {
   width: 100px;
 }
+
+.custom-height {
+  height: 10px;
+}
