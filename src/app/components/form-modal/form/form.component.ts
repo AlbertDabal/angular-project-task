@@ -1,5 +1,6 @@
 import { Component, Input, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Product } from '../../../../types/product';
 
 interface Seller {
   id: number;
@@ -17,12 +18,12 @@ export class FormComponent {
   @Input({
     required: true,
   })
-  product: any;
+  product!: Product;
 
   @Input({
     required: true,
   })
-  listProducts: any;
+  listProducts!: Product[];
 
   userForm: FormGroup;
 
@@ -79,20 +80,21 @@ export class FormComponent {
   }
 
   ngOnChanges() {
-    console.log('product', this.product);
+    if (!this.listProducts) return;
 
     const seller = this.listProducts.reduce((acc: any, currentValue: any) => {
-      console.log('currentValue', currentValue);
       const { id, name } = currentValue.seller;
 
       acc.push({ id: id, name: name });
       return acc;
     }, []);
 
-    console.log('seller', seller);
-
     this.listSeller.set(seller);
 
+    this.setInitValue();
+  }
+
+  setInitValue = () => {
     this.userForm.patchValue({
       productName: this.product.productName,
       popularityValue: this.product.popularityValue,
@@ -103,14 +105,13 @@ export class FormComponent {
       seller: this.product.sellerId,
       activeStockNumber: this.product.activeStockNumber,
     });
-  }
+  };
 
-  // Obsługa przesłania formularza
-  submitForm(): void {
-    if (this.userForm.valid) {
-      console.log('Form data:', this.userForm.value);
-    } else {
-      console.log('Form is invalid');
-    }
-  }
+  handleClose = () => {
+    this.setInitValue();
+  };
+
+  handleSave = () => {
+    this.setInitValue();
+  };
 }

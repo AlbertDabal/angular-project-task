@@ -1,77 +1,96 @@
-<form [formGroup]="userForm">
-  <div class="mb-3">
-    <label for="productName" class="form-label">Product name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="productName"
-      aria-describedby="productName"
-      formControlName="productName"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="popularityValue" class="form-label">Popularity Value </label>
-    <input
-      type="number"
-      class="form-control"
-      id="popularityValue"
-      formControlName="popularityValue"
-      [attr.readonly]="userForm.get('isPreorder')?.value ? true : null"
-    />
-  </div>
-  <div class="mb-3 form-check">
-    <input
-      type="checkbox"
-      class="form-check-input"
-      id="isPreorder"
-      formControlName="isPreorder"
-    />
-    <label class="form-check-label" for="isPreorder">isPreorder</label>
-  </div>
-  <div class="mb-3">
-    <label for="type" class="form-label">Type</label>
-    <select id="type" class="form-select" formControlName="type">
-      <option>kinguin</option>
-      <option>other</option>
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="price" class="form-label">Price</label>
-    <input
-      type="text"
-      class="form-control"
-      id="price"
-      aria-describedby="price"
-      formControlName="price"
-    />
-  </div>
-  <div class="mb-3">
-    <label for="currency" class="form-label">Currency</label>
-    <select id="currency" class="form-select" formControlName="currency">
-      <option>EUR</option>
-      <option>USD</option>
-      <option>GBP</option>
-      <option>PLN</option>
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="seller" class="form-label">Seller</label>
-    <select id="seller" class="form-select" formControlName="seller">
-      @for (item of listSeller(); track item) {
-      <option [value]="item.id">{{ item.name }}</option>
-      }
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="activeStockNumber" class="form-label"
-      >Active Stock Number</label
-    >
-    <input
-      type="number"
-      class="form-control"
-      id="activeStockNumber"
-      formControlName="activeStockNumber"
-    />
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="modal-body">
+  <form [formGroup]="userForm">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Product name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="productName"
+        aria-describedby="productName"
+        formControlName="productName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="popularityValue" class="form-label">Popularity Value </label>
+      <input
+        type="number"
+        class="form-control"
+        id="popularityValue"
+        formControlName="popularityValue"
+        [attr.readonly]="userForm.get('isPreorder')?.value ? true : null"
+      />
+    </div>
+    <div class="mb-3 form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="isPreorder"
+        formControlName="isPreorder"
+      />
+      <label class="form-check-label" for="isPreorder">isPreorder</label>
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">Type</label>
+      <select id="type" class="form-select" formControlName="type">
+        <option>kinguin</option>
+        <option>other</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="text"
+        class="form-control"
+        id="price"
+        aria-describedby="price"
+        formControlName="price"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="currency" class="form-label">Currency</label>
+      <select id="currency" class="form-select" formControlName="currency">
+        <option>EUR</option>
+        <option>USD</option>
+        <option>GBP</option>
+        <option>PLN</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="seller" class="form-label">Seller</label>
+      <select id="seller" class="form-select" formControlName="seller">
+        @for (item of listSeller(); track item) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="activeStockNumber" class="form-label"
+        >Active Stock Number</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="activeStockNumber"
+        formControlName="activeStockNumber"
+      />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    data-bs-dismiss="modal"
+    (click)="handleClose()"
+  >
+    Close
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-dismiss="modal"
+    (click)="handleSave()"
+  >
+    Save
+  </button>
+</div>

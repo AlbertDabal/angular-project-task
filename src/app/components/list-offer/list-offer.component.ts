@@ -3,6 +3,7 @@ import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormModalComponent } from '../form-modal/form-modal.component';
 import { NgxPermissionsModule, NgxPermissionsService } from 'ngx-permissions';
+import { Product } from '../../../types/product';
 
 @Component({
   selector: 'app-list-offer',
@@ -23,7 +24,7 @@ export class ListOfferComponent {
   CORRECT_VALUE_LENGTH = 24;
   id = signal('');
   isError = signal(false);
-  kinguinOfferData = signal<any>([]);
+  kinguinOfferData = signal<Product[]>([]);
   selectedItem = signal(null);
 
   hasPermission(permission: string): boolean {
@@ -69,13 +70,10 @@ export class ListOfferComponent {
     }
 
     if (this.id().length === this.CORRECT_VALUE_LENGTH) {
-      console.log('TEST12345');
       this.isError.set(false);
       this.addQueryParam();
       this.fetchData();
     } else {
-      console.log('TEST123');
-
       this.isError.set(true);
       this.kinguinOfferData.set([]);
     }
