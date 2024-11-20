@@ -112,6 +112,17 @@ export class FormComponent {
   };
 
   handleSave = () => {
+    //IN THE FETURE ADD REQUEST POST
     this.setInitValue();
   };
+
+  ngAfterViewInit(): void {
+    const modalElement = document.getElementById('staticBackdrop');
+
+    if (modalElement) {
+      modalElement.addEventListener('hidden.bs.modal', () => {
+        this.setInitValue();
+      });
+    }
+  }
 }

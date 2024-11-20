@@ -48,7 +48,6 @@ export class ListOfferComponent {
       )
       .subscribe(
         (res: any) => {
-          console.log('Dane pobrane:', res);
           this.kinguinOfferData.set(res._embedded.kinguinOffer);
         },
         (error) => {
